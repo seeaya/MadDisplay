@@ -10,10 +10,10 @@ struct Area {
         }
     }
 
-    var x1: Coord = 0
-    var y1: Coord = 0
-    var x2: Coord = 0
-    var y2: Coord = 0
+    public var x1: Coord = 0
+    public var y1: Coord = 0
+    public var x2: Coord = 0
+    public var y2: Coord = 0
 
     var box: Recurse? = nil
 

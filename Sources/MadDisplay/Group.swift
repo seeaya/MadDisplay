@@ -1,24 +1,24 @@
 public class Group {
 
-    struct GroupOptions: OptionSet {
-        let rawValue: UInt8
+    public struct GroupOptions: OptionSet {
+        public let rawValue: UInt8
 
-        static let itemRemoved = GroupOptions(rawValue: 1 << 0)
-        static let inGroup = GroupOptions(rawValue: 1 << 1)
-        static let hidden = GroupOptions(rawValue: 1 << 2)
-        static let hiddenByParent = GroupOptions(rawValue: 1 << 3)
+        public static let itemRemoved = GroupOptions(rawValue: 1 << 0)
+        public static let inGroup = GroupOptions(rawValue: 1 << 1)
+        public static let hidden = GroupOptions(rawValue: 1 << 2)
+        public static let hiddenByParent = GroupOptions(rawValue: 1 << 3)
     }
 
-    var children: [AnyObject] = []
-    var absoluteTransform: Transform!
-    var dirtyArea = Area()
-    var x: Int
-    var y: Int
-    var scale: Int
+    public var children: [AnyObject] = []
+    public var absoluteTransform: Transform!
+    public var dirtyArea = Area()
+    public var x: Int
+    public var y: Int
+    public var scale: Int
     //var maxSize: Int
-    var options: GroupOptions = []
+    public var options: GroupOptions = []
 
-    var size: Int {
+    public var size: Int {
         children.count
     }
 
@@ -36,11 +36,11 @@ public class Group {
 
 extension Group {
 
-    func getHidden() -> Bool {
+    public func getHidden() -> Bool {
         return options.contains(.hidden)
     }
 
-    func setHidden(_ value: Bool) {
+    public func setHidden(_ value: Bool) {
         if options.contains(.hidden) == value {
             return
         }
@@ -65,7 +65,7 @@ extension Group {
     }
 
 
-    func setHiddenByParent(_ value: Bool) {
+    public func setHiddenByParent(_ value: Bool) {
         if options.contains(.hiddenByParent) == value {
             return
         }
@@ -89,11 +89,11 @@ extension Group {
         }
     }
 
-    func getScale() -> Int {
+    public func getScale() -> Int {
         return scale
     }
 
-    func getPreviousArea() -> Area? {
+    public func getPreviousArea() -> Area? {
         var first = true
         var area: Area? = nil
 
@@ -130,7 +130,7 @@ extension Group {
         return area
     }
 
-    func updateChildTransforms() {
+    public func updateChildTransforms() {
         if !options.contains(.inGroup) {
             return
         }
@@ -144,7 +144,7 @@ extension Group {
         }
     }
 
-    func updateTransform(_ _parentTransform: Transform?) {
+    public func updateTransform(_ _parentTransform: Transform?) {
         if _parentTransform != nil {
             options.insert(.inGroup)
         } else {
@@ -347,7 +347,7 @@ extension Group {
         children[index] = group
     }
 
-    func fillArea(colorSpace: ColorSpace, area: Area, mask: inout [UInt32], data: inout [UInt32]) -> Bool {
+    public func fillArea(colorSpace: ColorSpace, area: Area, mask: inout [UInt32], data: inout [UInt32]) -> Bool {
         var fullCoverage = false
         for index in (0..<size).reversed() {
             let layer = children[index]
@@ -368,7 +368,7 @@ extension Group {
         return fullCoverage
     }
 
-    func finishRefresh() {
+    public func finishRefresh() {
         options.remove(.itemRemoved)
 
         for index in (0..<size).reversed() {
@@ -382,7 +382,7 @@ extension Group {
         }
     }
 
-    func getRefreshAreas(_ tail: Area?) -> Area? {
+    public func getRefreshAreas(_ tail: Area?) -> Area? {
         var tail = tail
 
         if options.contains(.itemRemoved) {

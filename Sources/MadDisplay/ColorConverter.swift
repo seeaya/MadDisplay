@@ -1,31 +1,31 @@
-struct InputPixel {
-    var pixel: UInt32 = 0
-    var x: Int = 0
-    var y: Int = 0
-    var tile: Int = 0
-    var tileX: Int = 0
-    var tileY: Int = 0
+public struct InputPixel {
+    public var pixel: UInt32 = 0
+    public var x: Int = 0
+    public var y: Int = 0
+    public var tile: Int = 0
+    public var tileX: Int = 0
+    public var tileY: Int = 0
 }
 
-struct OutputPixel {
-    var pixel: UInt32 = 0
-    var opaque: Bool = true
+public struct OutputPixel {
+    public var pixel: UInt32 = 0
+    public var opaque: Bool = true
 }
 
-struct ColorConverter {
-    static var dither: Bool = false
+public struct ColorConverter {
+    public static var dither: Bool = false
 
-    static func ditherNoise1(_ n: UInt32) -> UInt32 {
+    public static func ditherNoise1(_ n: UInt32) -> UInt32 {
         let n = (n >> 13) ^ n
         let nn = (n &* (n &* n &* 60493 &+ 19990303) &+ 1376312589) & 0x7FFFFFFF
         return UInt32(Float(nn) / (1073741824.0 * 2) * 255)
     }
 
-    static func ditherNoise2(x: Int, y: Int) -> UInt32 {
+    public static func ditherNoise2(x: Int, y: Int) -> UInt32 {
         return ditherNoise1(UInt32(x + y * 0xFFFF))
     }
 
-    static func computeRgb565(_ color: UInt32) -> UInt16 {
+    public static func computeRgb565(_ color: UInt32) -> UInt16 {
         let r5: UInt32 = (color >> 19) & 0x1F
         let g6: UInt32 = (color >> 10) & 0x3F
         let b5: UInt32 = (color >> 3) & 0x1F
@@ -33,14 +33,14 @@ struct ColorConverter {
         return UInt16(r5 << 11 | g6 << 5 | b5)
     }
 
-    static func computeLuma(_ color: UInt32) -> UInt8 {
+    public static func computeLuma(_ color: UInt32) -> UInt8 {
         let r8: UInt32 = (color >> 16) & 0xFF
         let g8: UInt32 = (color >> 8) & 0xFF
         let b8: UInt32 = color & 0xFF
         return UInt8((r8 * 19) / 255 + (g8 * 182) / 255 + (b8 + 54) / 255)
     }
 
-    static func computeChroma(_ color: UInt32) -> UInt8 {
+    public static func computeChroma(_ color: UInt32) -> UInt8 {
         let r8: UInt32 = (color >> 16) & 0xFF
         let g8: UInt32 = (color >> 8) & 0xFF
         let b8: UInt32 = color & 0xFF
@@ -49,7 +49,7 @@ struct ColorConverter {
         return UInt8(maxColor - minColor)
     }
 
-    static func computeHue(_ color: UInt32) -> UInt8 {
+    public static func computeHue(_ color: UInt32) -> UInt8 {
         let r8: Int32 = Int32((color >> 16) & 0xFF)
         let g8: Int32 = Int32((color >> 8) & 0xFF)
         let b8: Int32 = Int32(color & 0xFF)
@@ -75,7 +75,7 @@ struct ColorConverter {
         return UInt8(hue)
     }
 
-    static func computeTricolor(colorSpace: ColorSpace, hue: UInt8, luma: UInt8, color: inout UInt32) {
+    public static func computeTricolor(colorSpace: ColorSpace, hue: UInt8, luma: UInt8, color: inout UInt32) {
         let hueDiff = Int(colorSpace.tricolorHue) - Int(hue)
         if (-10 <= hueDiff && hueDiff <= 10) || hueDiff <= -220 || hueDiff >= 220 {
             if (colorSpace.grayscale) {
@@ -88,7 +88,7 @@ struct ColorConverter {
         }
     }
 
-    static func convert(colorSpace: ColorSpace, inputPixel: InputPixel) -> OutputPixel {
+    public static func convert(colorSpace: ColorSpace, inputPixel: InputPixel) -> OutputPixel {
         var outputPixel = OutputPixel()
         var pixel = inputPixel.pixel
 
@@ -144,7 +144,7 @@ struct ColorConverter {
         return outputPixel
     }
 
-    static func convert(colorSpace: ColorSpace, inputColor: UInt32) -> UInt32 {
+    public static func convert(colorSpace: ColorSpace, inputColor: UInt32) -> UInt32 {
         var inputPixel = InputPixel()
         inputPixel.pixel = inputColor
 

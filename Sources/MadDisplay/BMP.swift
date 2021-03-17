@@ -1,36 +1,36 @@
 import SwiftIO
 
 public struct BMP {
-    struct FileHeader {
-        var bfSize: Int32 = 0
-        var bfReserved1: Int16 = 0
-        var bfReserved2: Int16 = 0
-        var bfOffBits: Int32 = 0
+    public struct FileHeader {
+        public var bfSize: Int32 = 0
+        public var bfReserved1: Int16 = 0
+        public var bfReserved2: Int16 = 0
+        public var bfOffBits: Int32 = 0
     }
 
-    struct InfoHeader {
-        var biSize: Int32 = 0
-        var biWidth: Int32 = 0
-        var biHeight: Int32 = 0
-        var biPlanes: UInt16 = 0
-        var biBitCount: UInt16 = 0
-        var biCompression: Int32 = 0
-        var biSizeImages: Int32 = 0
-        var biXpelsPerMeter: Int32 = 0
-        var biYpelsPerMeter: Int32 = 0
-        var biClrUsed: Int32 = 0
-        var biClrImportant: Int32 = 0
+    public struct InfoHeader {
+        public var biSize: Int32 = 0
+        public var biWidth: Int32 = 0
+        public var biHeight: Int32 = 0
+        public var biPlanes: UInt16 = 0
+        public var biBitCount: UInt16 = 0
+        public var biCompression: Int32 = 0
+        public var biSizeImages: Int32 = 0
+        public var biXpelsPerMeter: Int32 = 0
+        public var biYpelsPerMeter: Int32 = 0
+        public var biClrUsed: Int32 = 0
+        public var biClrImportant: Int32 = 0
     }
 
-    let header = UInt16(0x4D42)
-    let file: FileDescriptor
+    public let header = UInt16(0x4D42)
+    public let file: FileDescriptor
 
-    var palette: Palette! = nil
-    var bitmap: Bitmap! = nil
+    public var palette: Palette! = nil
+    public var bitmap: Bitmap! = nil
 
-    var bitsPerPixel: Int = 0
-    var width: Int = 0
-    var height: Int = 0
+    public var bitsPerPixel: Int = 0
+    public var width: Int = 0
+    public var height: Int = 0
 
 
     public init(path: String) {

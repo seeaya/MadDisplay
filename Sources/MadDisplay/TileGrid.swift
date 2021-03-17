@@ -1,35 +1,35 @@
 public class TileGrid {
-    struct TileOptions: OptionSet {
-        let rawValue: UInt16
+    public struct TileOptions: OptionSet {
+        public let rawValue: UInt16
 
-        static let partialChange = TileOptions(rawValue: 1 << 0)
-        static let fullChange = TileOptions(rawValue: 1 << 1)
-        static let moved = TileOptions(rawValue: 1 << 2)
-        static let inlineTiles = TileOptions(rawValue: 1 << 3)
-        static let inGroup = TileOptions(rawValue: 1 << 4)
-        static let flipX = TileOptions(rawValue: 1 << 5)
-        static let flipY = TileOptions(rawValue: 1 << 6)
-        static let transposeXY = TileOptions(rawValue: 1 << 7)
-        static let hidden = TileOptions(rawValue: 1 << 8)
-        static let hiddenByParent = TileOptions(rawValue: 1 << 9)
+        public static let partialChange = TileOptions(rawValue: 1 << 0)
+        public static let fullChange = TileOptions(rawValue: 1 << 1)
+        public static let moved = TileOptions(rawValue: 1 << 2)
+        public static let inlineTiles = TileOptions(rawValue: 1 << 3)
+        public static let inGroup = TileOptions(rawValue: 1 << 4)
+        public static let flipX = TileOptions(rawValue: 1 << 5)
+        public static let flipY = TileOptions(rawValue: 1 << 6)
+        public static let transposeXY = TileOptions(rawValue: 1 << 7)
+        public static let hidden = TileOptions(rawValue: 1 << 8)
+        public static let hiddenByParent = TileOptions(rawValue: 1 << 9)
     }
 
-    var bitmap: Bitmap
+    public var bitmap: Bitmap
 
-    var palette: Palette
-    var x, y: Int
-    var pixelWidth, pixelHeight: Int
-    var bitmapWidthInTiles: Int
-    var tilesInBitmap: Int
-    var gridWidthInTiles, gridHeightInTiles: Int
-    var tileWidthInPixels, tileHeightInPixels: Int
-    var topLeftX, topLeftY: Int
-    var dirtyArea: Area
-    var previousArea: Area!
-    var currentArea: Area
-    var options: TileOptions
-    var absoluteTransform: Transform!
-    var tiles: [Int]
+    public var palette: Palette
+    public var x, y: Int
+    public var pixelWidth, pixelHeight: Int
+    public var bitmapWidthInTiles: Int
+    public var tilesInBitmap: Int
+    public var gridWidthInTiles, gridHeightInTiles: Int
+    public var tileWidthInPixels, tileHeightInPixels: Int
+    public var topLeftX, topLeftY: Int
+    public var dirtyArea: Area
+    public var previousArea: Area!
+    public var currentArea: Area
+    public var options: TileOptions
+    public var absoluteTransform: Transform!
+    public var tiles: [Int]
 
     public init(bitmap: Bitmap, palette: Palette, width: Int = 1, height: Int = 1, tileWidth: Int = 0, tileHeight: Int = 0, defaultTile: Int = 0, x: Int = 0, y: Int = 0) {
         tiles = [Int](repeating: defaultTile, count: width * height)
@@ -73,11 +73,11 @@ public class TileGrid {
         }
     }
 
-    func getHidden() -> Bool {
+    public func getHidden() -> Bool {
         return options.contains(.hidden)
     }
 
-    func setHidden(_ value: Bool) {
+    public func setHidden(_ value: Bool) {
         if value {
             options.insert(.hidden)
         } else {
@@ -85,7 +85,7 @@ public class TileGrid {
         }
     }
 
-    func setHiddenByParent(_ value: Bool) {
+    public func setHiddenByParent(_ value: Bool) {
         if value {
             options.insert(.hiddenByParent)
         } else {
@@ -93,11 +93,11 @@ public class TileGrid {
         }
     }
 
-    func getPreviousArea() -> Area? {
+    public func getPreviousArea() -> Area? {
         return previousArea
     }
 
-    func updateCurrentX() {
+    public func updateCurrentX() {
         var width: Int
 
         if options.contains(.transposeXY) {
@@ -125,7 +125,7 @@ public class TileGrid {
         }
     }
 
-    func updateCurrentY() {
+    public func updateCurrentY() {
         var height: Int
 
         if options.contains(.transposeXY) {
@@ -153,7 +153,7 @@ public class TileGrid {
         }
     }
 
-    func updateTransform(_ transform: Transform?) {
+    public func updateTransform(_ transform: Transform?) {
         if transform != nil {
             options.insert(.inGroup)
         } else {
@@ -168,11 +168,11 @@ public class TileGrid {
         }
     }
 
-    func getX() -> Int {
+    public func getX() -> Int {
         return x
     }
 
-    func getY() -> Int {
+    public func getY() -> Int {
         return y
     }
 
@@ -217,24 +217,24 @@ public class TileGrid {
         }
     }
 
-    func getPalette() -> Palette {
+    public func getPalette() -> Palette {
         return palette
     }
 
-    func setPalette(_ palette: Palette) {
+    public func setPalette(_ palette: Palette) {
         self.palette = palette
         options.insert(.fullChange)
     }
 
-    func getWidth() -> Int {
+    public func getWidth() -> Int {
         return gridWidthInTiles
     }
 
-    func getHeight() -> Int {
+    public func getHeight() -> Int {
         return gridHeightInTiles
     }
 
-    func getTile(x: Int, y: Int) -> Int? {
+    public func getTile(x: Int, y: Int) -> Int? {
         let pos = y * gridWidthInTiles + x
         if pos < tiles.count {
             return tiles[pos]
@@ -276,15 +276,15 @@ public class TileGrid {
     }
 
 
-    func getFlipX() -> Bool {
+    public func getFlipX() -> Bool {
         return options.contains(.flipX)
     }
 
-    func getFlipY() -> Bool {
+    public func getFlipY() -> Bool {
         return options.contains(.flipY)
     }
 
-    func setFlipX(_ value: Bool) {
+    public func setFlipX(_ value: Bool) {
         if options.contains(.flipX) == value {
             return
         } else {
@@ -292,7 +292,7 @@ public class TileGrid {
         }
     }
 
-    func setFlipY(_ value: Bool) {
+    public func setFlipY(_ value: Bool) {
         if options.contains(.flipY) == value {
             return
         } else {
@@ -300,11 +300,11 @@ public class TileGrid {
         }
     }
 
-    func getTransposeXY() -> Bool {
+    public func getTransposeXY() -> Bool {
         return options.contains(.transposeXY)
     }
 
-    func setTransposeXY(_ value: Bool) {
+    public func setTransposeXY(_ value: Bool) {
         if options.contains(.transposeXY) == value {
             return
         }
@@ -326,13 +326,13 @@ public class TileGrid {
         options.insert(.moved)
     }
 
-    func setTopLeft(x: Int, y: Int) {
+    public func setTopLeft(x: Int, y: Int) {
         topLeftX = x
         topLeftY = y
         options.insert(.fullChange)
     }
 
-    func fillArea(colorSpace: ColorSpace, area: Area, mask: inout [UInt32], data: inout [UInt32]) -> Bool {
+    public func fillArea(colorSpace: ColorSpace, area: Area, mask: inout [UInt32], data: inout [UInt32]) -> Bool {
         if options.contains(.hidden) || options.contains(.hiddenByParent) {
             return false
         }
@@ -479,7 +479,7 @@ public class TileGrid {
         return fullCoverage
     }
 
-    func finishRefresh() {
+    public func finishRefresh() {
         let firstDraw = previousArea == nil
         let hidden = options.contains(.hidden) || options.contains(.hiddenByParent)
 
@@ -504,7 +504,7 @@ public class TileGrid {
         //print("finish 3")
     }
 
-    func getRefreshAreas(_ tail: Area?) -> Area? {
+    public func getRefreshAreas(_ tail: Area?) -> Area? {
         let firstDraw = previousArea == nil
         let hidden = options.contains(.hidden) || options.contains(.hiddenByParent)
 

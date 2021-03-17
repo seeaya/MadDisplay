@@ -2,11 +2,11 @@ import SwiftIO
 
 
 public final class MadDisplay {
-    let screen: BitmapWritable
-    let colorSpace: ColorSpace
-    let transform: Transform
-    let pixelsPerWord: Int
-    let screenArea: Area
+    public let screen: BitmapWritable
+    public let colorSpace: ColorSpace
+    public let transform: Transform
+    public let pixelsPerWord: Int
+    public let screenArea: Area
 
     //public init(screen: BitmapWritable, bitCount: Int) {
     public init(screen: BitmapWritable) {
@@ -22,7 +22,7 @@ public final class MadDisplay {
     }
 
 
-    func getUpdateAreas(_ area: Area) -> Area? {
+    public func getUpdateAreas(_ area: Area) -> Area? {
         guard let clipped = screenArea.intersection(area) else {
             return nil
         }
@@ -30,7 +30,7 @@ public final class MadDisplay {
         return clipped
     }
 
-    func getRefreshData(_ clipped: Area, group: Group) -> [UInt32] {
+    public func getRefreshData(_ clipped: Area, group: Group) -> [UInt32] {
         let pixelsPerBuffer = clipped.size
 
         var bufferSize = pixelsPerBuffer / pixelsPerWord

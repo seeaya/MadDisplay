@@ -1,15 +1,15 @@
 public final class Palette {
-    struct Colors {
-        var rgb888: UInt32 = 0
-        var rgb565: UInt16 = 0
-        var luma: UInt8 = 0
-        var hue: UInt8 = 0
-        var chroma: UInt8 = 0
-        var transparent: Bool = false
+    public struct Colors {
+        public var rgb888: UInt32 = 0
+        public var rgb565: UInt16 = 0
+        public var luma: UInt8 = 0
+        public var hue: UInt8 = 0
+        public var chroma: UInt8 = 0
+        public var transparent: Bool = false
     }
 
-    var colors: [Colors]
-    var needsRefresh = true
+    public var colors: [Colors]
+    public var needsRefresh = true
 
     public init(count: Int = 0) {
         colors = [Colors]()
@@ -19,7 +19,7 @@ public final class Palette {
         }
     }
 
-    func reserveCapacity(_ value: Int) {
+    public func reserveCapacity(_ value: Int) {
         if count == 0 {
             colors = [Colors](repeating: Colors(), count: count)
         } else if value > count {
@@ -30,7 +30,7 @@ public final class Palette {
 }
 
 extension Palette {
-    var count: Int {
+    public var count: Int {
         colors.count
     }
 
@@ -126,7 +126,7 @@ extension Palette {
     }
 
 
-    func finishRefresh() {
+    public func finishRefresh() {
         needsRefresh = false
     }
 

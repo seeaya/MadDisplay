@@ -1,23 +1,23 @@
 public final class Bitmap {
 
-    let width: Int
-    let height: Int
+    public let width: Int
+    public let height: Int
 
-    let bitsPerPixel: Int
-    let bytesPerPixel: Int
-    let rowStride: Int
-    let alignBits: Int
-    let uintSize: Int
+    public let bitsPerPixel: Int
+    public let bytesPerPixel: Int
+    public let rowStride: Int
+    public let alignBits: Int
+    public let uintSize: Int
 
-    let xShift: Int
+    public let xShift: Int
 
-    let xMask: UInt32
-    let bitMask: UInt32
+    public let xMask: UInt32
+    public let bitMask: UInt32
 
-    var dirtyArea: Area!
+    public var dirtyArea: Area!
 
-    var data: [UInt32]
-    var readOnly: Bool = false
+    public var data: [UInt32]
+    public var readOnly: Bool = false
 
     public init(width: Int, height: Int, bitCount: Int) {
         guard bitCount == 1 || bitCount == 2 || bitCount == 4 || bitCount == 8 || bitCount == 16 || bitCount == 32 else {
