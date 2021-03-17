@@ -1,9 +1,9 @@
-struct Area {
+public struct Area {
 
-    enum Recurse {
+    public enum Recurse {
         indirect case next(Area)
         
-        var data: Area {
+        public var data: Area {
             switch self {
             case .next(let data): return data
             }
@@ -15,9 +15,9 @@ struct Area {
     public var x2: Coord = 0
     public var y2: Coord = 0
 
-    var box: Recurse? = nil
+    public var box: Recurse? = nil
 
-    var next: Area? {
+    public var next: Area? {
         get {
             box?.data ?? nil
         }
@@ -30,14 +30,14 @@ struct Area {
         }
     }
 
-    init() {
+    public init() {
         x1 = 0
         y1 = 0
         x2 = 0
         y2 = 0
     }
 
-    init(x1: Coord, y1: Coord, x2: Coord, y2: Coord) {
+    public init(x1: Coord, y1: Coord, x2: Coord, y2: Coord) {
         guard x2 >= x1 && y2 >= y1 else {
             fatalError("x2/y2 must >= x1/y1")
         }
@@ -48,7 +48,7 @@ struct Area {
         self.y2 = y2
     }
 
-    init(x1: Coord, y1: Coord, width: Coord, height: Coord) {
+    public init(x1: Coord, y1: Coord, width: Coord, height: Coord) {
         guard width > 0 && height > 0 else {
             fatalError("width and height must > 1")
         }
@@ -61,7 +61,7 @@ struct Area {
 }
 
 extension Area: Equatable {
-    static func == (lhs: Area, rhs: Area) -> Bool {
+    public static func == (lhs: Area, rhs: Area) -> Bool {
         return
             lhs.x1 == rhs.x1 &&
             lhs.y1 == rhs.y1 &&
@@ -69,7 +69,7 @@ extension Area: Equatable {
             lhs.y2 == rhs.y2
     }
 
-    static func != (lhs: Area, rhs: Area) -> Bool {
+    public static func != (lhs: Area, rhs: Area) -> Bool {
         return
             lhs.x1 != rhs.x1 ||
             lhs.y1 != rhs.y1 ||
@@ -80,19 +80,19 @@ extension Area: Equatable {
 
 extension Area {
 
-    var width: Int {
+    public var width: Int {
         Int(x2 - x1 + 1)
     }
 
-    var height: Int {
+    public var height: Int {
         Int(y2 - y1 + 1)
     }
 
-    var size: Int {
+    public var size: Int {
         width * height
     }
 
-    func intersection(_ b: Area) -> Area? {
+    public func intersection(_ b: Area) -> Area? {
         let ix1 = x1 > b.x1 ? x1 : b.x1
         let iy1 = y1 > b.y1 ? y1 : b.y1
         let ix2 = x2 < b.x2 ? x2 : b.x2
@@ -105,7 +105,7 @@ extension Area {
         }
     }
 
-    func union(_ b: Area) -> Area {
+    public func union(_ b: Area) -> Area {
         let ux1 = x1 < b.x1 ? x1 : b.x1
         let uy1 = y1 < b.y1 ? y1 : b.y1
         let ux2 = x2 > b.x2 ? x2 : b.x2
@@ -114,7 +114,7 @@ extension Area {
         return Area(x1: ux1, y1: uy1, x2: ux2, y2: uy2)
     }
 
-    func transformWithin(mirrorX: Bool, mirrorY: Bool, transposeXY: Bool, _ whole: Area) -> Area {
+    public func transformWithin(mirrorX: Bool, mirrorY: Bool, transposeXY: Bool, _ whole: Area) -> Area {
         var transformed = Area()
 
         if mirrorX {
@@ -145,7 +145,7 @@ extension Area {
         return transformed
     }
 
-    func isSubset(of b: Area) -> Bool {
+    public func isSubset(of b: Area) -> Bool {
         if x1 <= b.x2 &&
             x2 >= b.x1 &&
             y1 <= b.y2 &&
@@ -156,7 +156,7 @@ extension Area {
             }
     }
 
-    func isSuperset(of b: Area) -> Bool {
+    public func isSuperset(of b: Area) -> Bool {
         if x1 >= b.x2 &&
             x2 <= b.x1 &&
             y1 >= b.y2 &&

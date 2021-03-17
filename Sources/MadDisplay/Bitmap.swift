@@ -63,7 +63,7 @@ public final class Bitmap {
 }
 
 
-extension Bitmap {
+public extension Bitmap {
 
     func getPixel(x: Int, y: Int) -> UInt32 {
         if x < 0 || x >= width || y < 0 || y >= height {
@@ -97,7 +97,7 @@ extension Bitmap {
     }
 }
 
-extension Bitmap {
+public extension Bitmap {
 
     /*func getRefreshAreas(_ tail: Area?) -> Area? {
         if dirtyArea.x1 == dirtyArea.x2 {
