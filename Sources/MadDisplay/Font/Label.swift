@@ -1,30 +1,30 @@
 public final class Label: Group {
 
-    let localGroup: Group
-    var font: Font
-    var text: String?
-    var paddingTop: Int = 0
-    var paddingBottom: Int = 0
-    var paddingLeft: Int = 0
-    var paddingRight: Int = 0
-    var lineSpacing: Double = 1.25
-    var backgroundTight: Bool = false
-    var color: UInt32
-    var backgroundColor: UInt32? = nil
-    var addedBackgroundTilegrid = false
+    public let localGroup: Group
+    public var font: Font
+    public var text: String?
+    public var paddingTop: Int = 0
+    public var paddingBottom: Int = 0
+    public var paddingLeft: Int = 0
+    public var paddingRight: Int = 0
+    public var lineSpacing: Double = 1.25
+    public var backgroundTight: Bool = false
+    public var color: UInt32
+    public var backgroundColor: UInt32? = nil
+    public var addedBackgroundTilegrid = false
     
-    var scaleValue: Int
+    public var scaleValue: Int
 
-    var height: Int
-    var maxCharAscent: Int
-    var maxCharDescent: Int
+    public var height: Int
+    public var maxCharAscent: Int
+    public var maxCharDescent: Int
 
-    let palette = Palette(count: 2)
-    let backgroundPalette = Palette(count: 1)
+    public let palette = Palette(count: 2)
+    public let backgroundPalette = Palette(count: 1)
 
-    var anchorPoint: Point?
-    var anchorPosition: Point?
-    var boundingBox: (Int, Int, Int, Int) = (0, 0, 0, 0)
+    public var anchorPoint: Point?
+    public var anchorPosition: Point?
+    public var boundingBox: (Int, Int, Int, Int) = (0, 0, 0, 0)
 
 
     public init(x: Int = 0, y: Int = 0, scale: Int = 1, text: String? = nil, color: UInt32 = Color.white, font: Font = RobotRegular16()) {

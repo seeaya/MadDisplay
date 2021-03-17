@@ -1,10 +1,10 @@
 public struct Glyph {
-    var bitmap: Bitmap? = nil
-    let tileIndex: Int = 0
-    let width: Int
-    let height: Int
-    let dx: Int
-    let dy: Int
-    let shiftX: Int
-    let shiftY: Int
+    public var bitmap: Bitmap? = nil
+    public let tileIndex: Int = 0
+    public let width: Int
+    public let height: Int
+    public let dx: Int
+    public let dy: Int
+    public let shiftX: Int
+    public let shiftY: Int
 }
